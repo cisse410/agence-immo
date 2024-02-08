@@ -3,7 +3,7 @@
 @section('title', $property->title)
 
 @section('content')
-    <div class="container">
+    <div class="container mt-4">
         <h1> {{$property->title }}</h1>
         <h2> {{$property->rooms }} pièces - {{ $property->surface }} m²</h2>
         <div class="text-primary font-weight-bold" style="font-size: 4rem">
@@ -12,17 +12,22 @@
         <hr>
         <div class="mt-4">
             <h4>Intéressé par ce bien? </h4>
-            <form action="" method="get" class="vstack gap-3">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <form action="{{route('property.contact', $property)}}" method="post" class="vstack gap-3">
                 @csrf
                 <div class="row">
-                    @include('partials.input', ['class' => 'col', 'name' => 'firstname', 'label' => 'Prénom'])
-                    @include('partials.input', ['class' => 'col', 'name' => 'lastname', 'label' => 'Nom'])
+                    @include('partials.input', ['class' => 'col', 'name' => 'firstname', 'label' => 'Prénom', 'value' => 'John'])
+                    @include('partials.input', ['class' => 'col', 'name' => 'lastname', 'label' => 'Nom', 'value' => 'Doe'])
                 </div>
                 <div class="row">
                     @include('partials.input', ['class' => 'col', 'name' => 'phone', 'label' => 'Téléphone'])
                     @include('partials.input', ['type' => 'email', 'class' => 'col', 'name' => 'email', 'label' => 'Email'])
                 </div>
-                @include('partials.input', ['type' => 'textarea', 'class' => 'col', 'name' => 'message', 'label' => 'Votre message'])
+                @include('partials.input', ['type' => 'textarea', 'class' => 'col', 'name' => 'message', 'label' => 'Votre message', 'value' => 'Contenu de mon message'])
                 <div>
                     <button class="btn btn-primary">Envoyer</button>
                 </div>
