@@ -9,13 +9,7 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <link
-            href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css"
-            rel="stylesheet">
-        <script
-            src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js">
-        </script>
-        <title>@yield('title') | Administration</title>
+        <title>@yield('title') | Immo</title>
     </head>
 
     <body>
@@ -32,35 +26,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active' => str_contains($route, 'property.')]) href="{{route('admin.property.index')}}">Gestion des biens</a>
-                        </li>
-                        <li class="nav-item">
-                            <a @class(['nav-link', 'active' => str_contains($route, 'option.')]) href="{{route('admin.option.index')}}">Gestion des options</a>
+                            <a @class(['nav-link', 'active' => str_contains($route, 'property.')]) href="/">
+                                Biens
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-
-        <div class="container mt-5">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="my-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @yield('content')
-        </div>
+        @yield('content')
 
 
         <script
@@ -74,13 +49,5 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
-
-        <script>
-            new TomSelect('select[multiple]', {plugins: {
-                remove_button: {
-                    title: 'Supprimer',
-                },
-            }});
-        </script>
     </body>
 </html>
