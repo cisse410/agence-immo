@@ -7,9 +7,15 @@ use App\Http\Requests\Admin\PropertyFormRequest;
 use App\Models\Option;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Property::class, 'property');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -37,9 +43,8 @@ class PropertyController extends Controller
         ]);
         return view('admin.properties.form', [
             'property' => $property,
-            'options' => Option::pluck('name','id'),
+            'options' => Option::pluck('name', 'id'),
         ]);
-
     }
 
     /**
@@ -65,9 +70,10 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
+        // dd(Auth::user()->can('delete', $property));
         return view('admin.properties.form', [
             'property' => $property,
-            'options' => Option::pluck('name','id'),
+            'options' => Option::pluck('name', 'id'),
         ]);
     }
 
